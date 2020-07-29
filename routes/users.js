@@ -11,7 +11,7 @@ router.post(
     check('email', 'El formato de correo no es valido').isEmail(),
     check('password', 'La contraseña debe contener al menos 6 caracteres').isLength({ min: 6 }),
   ],
-  usuarioController.addUser
+  usuarioController.addUser,
 );
 
 module.exports = router;
