@@ -6,6 +6,14 @@ const router = express.Router();
 
 const linkController = require('../controllers/link.controller');
 
-router.post('/', authMiddleware, linkController.addLink);
+router.post(
+  '/',
+  [
+    check('name', 'Sube un archivo').not().isEmpty(),
+    check('originalName', 'Sube un archivo').not().isEmpty(),
+  ],
+  authMiddleware,
+  linkController.addLink,
+);
 
 module.exports = router;
