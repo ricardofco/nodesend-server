@@ -17,6 +17,11 @@ class JWT {
     }
     return null;
   }
+
+  static varifyToken(token) {
+    const credentials = jwt.verify(token, process.env.SECRET);
+    return credentials;
+  }
 }
 
 module.exports = JWT;

@@ -30,4 +30,6 @@ exports.setUserCredentials = async (req, res, next) => {
   return 0;
 };
 
-exports.getUserAuthenticated = async (req, res) => {};
+exports.getUserAuthenticated = async (req, res) => {
+  res.status(200).json({ msg: req.user });
+};
