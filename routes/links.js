@@ -5,6 +5,7 @@ const authMiddleware = require('../middleware/auth');
 const router = express.Router();
 
 const linkController = require('../controllers/link.controller');
+const fileController = require('../controllers/file.controller');
 
 router.post(
   '/',
@@ -15,5 +16,7 @@ router.post(
   authMiddleware,
   linkController.addLink,
 );
+
+router.get('/:url', linkController.getLink, fileController.deleteFile);
 
 module.exports = router;

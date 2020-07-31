@@ -40,3 +40,21 @@ exports.addLink = async (req, res) => {
     return res.status(500).json({ error: { msg: error } });
   }
 };
+
+exports.getLink = async (req, res, next) => {
+  const { url } = req.params;
+  const link = await Link.findOne({ url });
+  if (!link) {
+    res.status(404).json({ error: { msg: stringsError.resourceNotFound } });
+  }
+  res.status(200).json({ file: link });
+
+  if (link.downloads === 1) {
+    req.file = link.name;
+    await Link.findOneAndRemove(req.params.url);
+    next();
+  } else {
+    link.downloads -= 1;
+    await link.save();
+  }
+};

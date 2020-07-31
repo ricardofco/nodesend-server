@@ -1,5 +1,7 @@
 const multer = require('multer');
 const shortid = require('shortid');
+const fs = require('fs');
+const { stringsSuccess } = require('../constants');
 
 exports.uploadFile = (req, res, next) => {
   const multerConf = {
@@ -28,4 +30,11 @@ exports.uploadFile = (req, res, next) => {
   });
 };
 
-exports.deleteFile = (req, res) => {};
+exports.deleteFile = (req, res) => {
+  try {
+    fs.unlinkSync(`${__dirname}/../uploads/${req.file}`);
+    res.status(204).json({ msg: stringsSuccess.deleteSuccessfully });
+  } catch (error) {
+    res.status(500).json({ error: { msg: error } });
+  }
+};

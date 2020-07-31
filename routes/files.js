@@ -6,6 +6,4 @@ const authMiddleware = require('../middleware/auth');
 
 router.post('/', authMiddleware, fileController.uploadFile);
 
-router.delete('/:id', fileController.deleteFile);
-
 module.exports = router;
