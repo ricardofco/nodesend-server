@@ -2,8 +2,9 @@ const express = require('express');
 
 const router = express.Router();
 const fileController = require('../controllers/file.controller');
+const authMiddleware = require('../middleware/auth');
 
-router.post('/', fileController.uploadFile);
+router.post('/', authMiddleware, fileController.uploadFile);
 
 router.delete('/:id', fileController.deleteFile);
 
