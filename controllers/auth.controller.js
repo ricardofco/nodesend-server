@@ -22,7 +22,7 @@ exports.setUserCredentials = async (req, res, next) => {
   }
   const token = JWT.createJWT(password, user);
   if (token) {
-    res.status(200).json({ token });
+    res.status(200).json({ token, user: user.name });
   } else {
     res.status(401).json({ error: { msg: stringsError.badCredentials } });
     return next();
